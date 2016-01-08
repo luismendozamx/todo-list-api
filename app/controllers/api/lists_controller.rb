@@ -10,7 +10,7 @@ class Api::ListsController < ApplicationController
 
   # GET /lists/1
   def show
-    render json: @list
+    render json: @list, location: [:api, @list]
   end
 
   # POST /lists
@@ -27,9 +27,9 @@ class Api::ListsController < ApplicationController
   # PATCH/PUT /lists/1
   def update
     if @list.update(list_params)
-      render json: @list
+      render json: @list, location: [:api, @list]
     else
-      render json: @list.errors, status: :unprocessable_entity
+      render json: @list.errors, status: :unprocessable_entity, location: [:api, @list]
     end
   end
 
