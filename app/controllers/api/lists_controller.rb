@@ -18,9 +18,9 @@ class Api::ListsController < ApplicationController
     @list = List.new(list_params)
 
     if @list.save
-      render json: @list, status: :created, location: @list
+      render json: @list, status: :created, location: [:api, @list]
     else
-      render json: @list.errors, status: :unprocessable_entity
+      render json: @list.errors, status: :unprocessable_entity, location: [:api, @list]
     end
   end
 
@@ -36,6 +36,7 @@ class Api::ListsController < ApplicationController
   # DELETE /lists/1
   def destroy
     @list.destroy
+    head 204
   end
 
   private
